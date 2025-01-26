@@ -54,36 +54,44 @@ public class Main {
         JLabel labelTier = new JLabel("Tier:");
         JComboBox<String> comboTier = new JComboBox<>(new String[]{"3", "4", "5", "6", "7", "8"});
 
-        JCheckBox royalBuffCheckBox = new JCheckBox("Royal Buff");
-        JCheckBox focusCheckBox = new JCheckBox("Focus");
-        JCheckBox activity10CheckBox = new JCheckBox("%10 Activity");
-        JCheckBox activity20CheckBox = new JCheckBox("%20 Activity");
+        JCheckBox royalBuffCheck = new JCheckBox("Royal Buff");
+        JCheckBox focusCheck = new JCheckBox("Focus");
+        JCheckBox activity10Check = new JCheckBox("%10 Activity");
+        JCheckBox activity20Check = new JCheckBox("%20 Activity");
 
         ActionListener checkBoxListener = e -> {
             int baseRate = 15;
 
-            if (royalBuffCheckBox.isSelected() && focusCheckBox.isSelected()) {
-                baseRate = 53;
-            } else if (royalBuffCheckBox.isSelected()) {
+            if (royalBuffCheck.isSelected()) {
                 baseRate = 36;
-            } else if (focusCheckBox.isSelected()) {
-                baseRate = 43;
             }
 
-            if (activity10CheckBox.isSelected()) {
-                baseRate += 10;
-            } else if (activity20CheckBox.isSelected()) {
-                baseRate += 20;
+            if (focusCheck.isSelected()) {
+                if (royalBuffCheck.isSelected()) {
+                    baseRate = 53;
+                } else {
+                    baseRate = 43;
+                }
+            }
+
+            if (activity10Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 40 : 21;
+            } else if (activity20Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 43 : 27;
+            } else if (activity10Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 55 : 46;
+            } else if (activity20Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 57 : 49;
             }
 
             textReturnRate.setText(String.valueOf(baseRate));
             dynamicReturnRateLabel.setText("Return Rate: %" + baseRate);
         };
 
-        royalBuffCheckBox.addActionListener(checkBoxListener);
-        focusCheckBox.addActionListener(checkBoxListener);
-        activity10CheckBox.addActionListener(checkBoxListener);
-        activity20CheckBox.addActionListener(checkBoxListener);
+        royalBuffCheck.addActionListener(checkBoxListener);
+        focusCheck.addActionListener(checkBoxListener);
+        activity10Check.addActionListener(checkBoxListener);
+        activity20Check.addActionListener(checkBoxListener);
 
         JButton calculateButton = new JButton("Calculate");
         JLabel resultLabel = new JLabel("Result: ");
@@ -142,10 +150,10 @@ public class Main {
         panel.add(textReturnRate);
         panel.add(labelTier);
         panel.add(comboTier);
-        panel.add(royalBuffCheckBox);
-        panel.add(focusCheckBox);
-        panel.add(activity10CheckBox);
-        panel.add(activity20CheckBox);
+        panel.add(royalBuffCheck);
+        panel.add(focusCheck);
+        panel.add(activity10Check);
+        panel.add(activity20Check);
         panel.add(calculateButton);
         panel.add(resultLabel);
 
@@ -182,21 +190,29 @@ public class Main {
         JLabel eldeKalanLabel = new JLabel("Remaining Raw: ");
 
 
-        ActionListener updateReturnRate = e -> {
+        ActionListener checkBoxListener = e -> {
             int baseRate = 15;
 
-            if (royalBuffCheck.isSelected() && focusCheck.isSelected()) {
-                baseRate = 53;
-            } else if (royalBuffCheck.isSelected()) {
+            if (royalBuffCheck.isSelected()) {
                 baseRate = 36;
-            } else if (focusCheck.isSelected()) {
-                baseRate = 43;
             }
 
-            if (activity10Check.isSelected()) {
-                baseRate += 10;
-            } else if (activity20Check.isSelected()) {
-                baseRate += 20;
+            if (focusCheck.isSelected()) {
+                if (royalBuffCheck.isSelected()) {
+                    baseRate = 53;
+                } else {
+                    baseRate = 43;
+                }
+            }
+
+            if (activity10Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 40 : 21;
+            } else if (activity20Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 43 : 27;
+            } else if (activity10Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 55 : 46;
+            } else if (activity20Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 57 : 49;
             }
 
             textReturnRate.setText(String.valueOf(baseRate));
@@ -204,10 +220,10 @@ public class Main {
         };
 
 
-        royalBuffCheck.addActionListener(updateReturnRate);
-        focusCheck.addActionListener(updateReturnRate);
-        activity10Check.addActionListener(updateReturnRate);
-        activity20Check.addActionListener(updateReturnRate);
+        royalBuffCheck.addActionListener(checkBoxListener);
+        focusCheck.addActionListener(checkBoxListener);
+        activity10Check.addActionListener(checkBoxListener);
+        activity20Check.addActionListener(checkBoxListener);
 
         calculateButton.addActionListener(new ActionListener() {
             @Override
@@ -349,36 +365,44 @@ public class Main {
                 "7","7.1", "7.2" , "7.3",
                 "8" , "8.1" , "8.2" , "8.3"});
 
-        JCheckBox royalBuffCheckBox = new JCheckBox("Royal Buff");
-        JCheckBox focusCheckBox = new JCheckBox("Focus");
-        JCheckBox activity10CheckBox = new JCheckBox("%10 Activity");
-        JCheckBox activity20CheckBox = new JCheckBox("%20 Activity");
+        JCheckBox royalBuffCheck = new JCheckBox("Royal Buff");
+        JCheckBox focusCheck = new JCheckBox("Focus");
+        JCheckBox activity10Check = new JCheckBox("%10 Activity");
+        JCheckBox activity20Check = new JCheckBox("%20 Activity");
 
         ActionListener checkBoxListener = e -> {
             int baseRate = 15;
 
-            if (royalBuffCheckBox.isSelected() && focusCheckBox.isSelected()) {
-                baseRate = 53;
-            } else if (royalBuffCheckBox.isSelected()) {
+            if (royalBuffCheck.isSelected()) {
                 baseRate = 36;
-            } else if (focusCheckBox.isSelected()) {
-                baseRate = 43;
             }
 
-            if (activity10CheckBox.isSelected()) {
-                baseRate += 10;
-            } else if (activity20CheckBox.isSelected()) {
-                baseRate += 20;
+            if (focusCheck.isSelected()) {
+                if (royalBuffCheck.isSelected()) {
+                    baseRate = 53;
+                } else {
+                    baseRate = 43;
+                }
+            }
+
+            if (activity10Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 40 : 21;
+            } else if (activity20Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 43 : 27;
+            } else if (activity10Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 55 : 46;
+            } else if (activity20Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 57 : 49;
             }
 
             textReturnRate.setText(String.valueOf(baseRate));
             dynamicReturnRateLabel.setText("Return Rate: %" + baseRate);
         };
 
-        royalBuffCheckBox.addActionListener(checkBoxListener);
-        focusCheckBox.addActionListener(checkBoxListener);
-        activity10CheckBox.addActionListener(checkBoxListener);
-        activity20CheckBox.addActionListener(checkBoxListener);
+        royalBuffCheck.addActionListener(checkBoxListener);
+        focusCheck.addActionListener(checkBoxListener);
+        activity10Check.addActionListener(checkBoxListener);
+        activity20Check.addActionListener(checkBoxListener);
 
         JButton calculateButton = new JButton("Calculate");
         JLabel resultLabel = new JLabel("Result: ");
@@ -487,10 +511,10 @@ public class Main {
         panel.add(textReturnRate);
         panel.add(labelTier);
         panel.add(comboTier);
-        panel.add(royalBuffCheckBox);
-        panel.add(focusCheckBox);
-        panel.add(activity10CheckBox);
-        panel.add(activity20CheckBox);
+        panel.add(royalBuffCheck);
+        panel.add(focusCheck);
+        panel.add(activity10Check);
+        panel.add(activity20Check);
         panel.add(calculateButton);
         panel.add(resultLabel);
 
@@ -523,21 +547,29 @@ public class Main {
         JLabel eldeKalanLabel = new JLabel("Remaining Raw: ");
 
 
-        ActionListener updateReturnRate = e -> {
+        ActionListener checkBoxListener = e -> {
             int baseRate = 15;
 
-            if (royalBuffCheck.isSelected() && focusCheck.isSelected()) {
-                baseRate = 53;
-            } else if (royalBuffCheck.isSelected()) {
+            if (royalBuffCheck.isSelected()) {
                 baseRate = 36;
-            } else if (focusCheck.isSelected()) {
-                baseRate = 43;
             }
 
-            if (activity10Check.isSelected()) {
-                baseRate += 10;
-            } else if (activity20Check.isSelected()) {
-                baseRate += 20;
+            if (focusCheck.isSelected()) {
+                if (royalBuffCheck.isSelected()) {
+                    baseRate = 53;
+                } else {
+                    baseRate = 43;
+                }
+            }
+
+            if (activity10Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 40 : 21;
+            } else if (activity20Check.isSelected() && !focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 43 : 27;
+            } else if (activity10Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 55 : 46;
+            } else if (activity20Check.isSelected() && focusCheck.isSelected()) {
+                baseRate = royalBuffCheck.isSelected() ? 57 : 49;
             }
 
             textReturnRate.setText(String.valueOf(baseRate));
@@ -545,10 +577,10 @@ public class Main {
         };
 
 
-        royalBuffCheck.addActionListener(updateReturnRate);
-        focusCheck.addActionListener(updateReturnRate);
-        activity10Check.addActionListener(updateReturnRate);
-        activity20Check.addActionListener(updateReturnRate);
+        royalBuffCheck.addActionListener(checkBoxListener);
+        focusCheck.addActionListener(checkBoxListener);
+        activity10Check.addActionListener(checkBoxListener);
+        activity20Check.addActionListener(checkBoxListener);
 
         calculateButton.addActionListener(new ActionListener() {
             @Override
