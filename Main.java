@@ -12,33 +12,39 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println(deneme(100, 0.36, 4));
+
         JOptionPane.showMessageDialog(null,
                 "-This program calculates the result with worst return rate situation-",
                 "Attention",
                 JOptionPane.WARNING_MESSAGE);
 
         JFrame frame = new JFrame("Refined Calculator");
-        frame.setSize(600, 500);
+        frame.setSize(850, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+
+
+        frame.setResizable(false);
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
         JPanel calculatorPanel = createCalculatorPanel();
         JPanel craftPanel = createCraftPanel();
         JPanel refineForStonePanel = createRefineForStone();
-        JPanel neededRawForStonePnale =createNeededRawForStone();
+        JPanel neededRawForStonePnale = createNeededRawForStone();
         JPanel historyPanel = createHistoryPanel();
 
         tabbedPane.addTab("1-Needed Raw Calculator", calculatorPanel);
         tabbedPane.addTab("2-Refine Result Calculator", craftPanel);
-        tabbedPane.addTab("3-Refine for Stone" , refineForStonePanel);
-        tabbedPane.addTab("4-Needed Raw for Stone" , neededRawForStonePnale);
+        tabbedPane.addTab("3-Refine for Stone", refineForStonePanel);
+        tabbedPane.addTab("4-Needed Raw for Stone", neededRawForStonePnale);
         tabbedPane.addTab("5-Refined Calculator History", historyPanel);
 
         frame.add(tabbedPane, BorderLayout.CENTER);
         frame.setVisible(true);
     }
+
 
     private static JPanel createCalculatorPanel() {
         JPanel panel = new JPanel();
@@ -52,7 +58,7 @@ public class Main {
         textReturnRate.setEditable(false);
 
         JLabel labelTier = new JLabel("Tier:");
-        JComboBox<String> comboTier = new JComboBox<>(new String[]{"3", "4", "5", "6", "7", "8"});
+        JComboBox<String> comboTier = new JComboBox<>(new String[]{"1","3", "4", "5", "6", "7", "8"});
 
         JCheckBox royalBuffCheck = new JCheckBox("Royal Buff");
         JCheckBox focusCheck = new JCheckBox("Focus");
@@ -106,6 +112,9 @@ public class Main {
                 int bolunecekSayi;
                     int tier = Integer.parseInt(selectedTier);
                     switch (tier) {
+                        case 1:
+                            bolunecekSayi = 1;
+                            break;
                         case 3:
                         case 4:
                             bolunecekSayi = 2;
@@ -129,12 +138,26 @@ public class Main {
                 int sonuc = 0;
 
                 for (int i = elimizdekiRaw; i >= bolunecekSayi; i--) {
-                    if (deneme(i, returnRate, bolunecekSayi) == istenilenDeger) {
-                        sonuc = i;
-                        break;
+                    int testValue = deneme(i, returnRate, bolunecekSayi);
+                    if(tier == 1){
+                        if(testValue < istenilenDeger){
+                            sonuc = i+1;
+                            break;
+                        }
+                    }else {
+                        if (testValue == istenilenDeger) {
+                            sonuc = i;
+                            break;
+                        }
                     }
                 }
-                String sonucLabel = "Raw";
+                String sonucLabel;
+                if(tier == 1){
+                    sonucLabel = "Alt Tier";
+
+                }else{
+                    sonucLabel = "Raw";
+                }
                 resultLabel.setText("Result: Needed " + sonucLabel + " = " + sonuc);
 
             } catch (NumberFormatException ex) {
@@ -315,7 +338,7 @@ public class Main {
                     historyModel.addElement("3-> " +
                             "Material: " + material +
                             " / Tier: " + selectedTier +
-                            " / Result: " + sonuc +
+                            " / Result: " + sonuc*çarpılacakSayi +
                             " / Remaining: " + ELDE_KALAN_RAW +
                             " / Return Rate: %" + (int) (returnRate * 100) +
                             "         ////" + timestamp);
@@ -358,7 +381,7 @@ public class Main {
         textReturnRate.setEditable(false);
 
         JLabel labelTier = new JLabel("Tier:");
-        JComboBox<String> comboTier = new JComboBox<>(new String[]{"3" ,
+        JComboBox<String> comboTier = new JComboBox<>(new String[]{"1","3" ,
                 "4" , "4.1", "4.2" ,"4.3" ,
                 "5" , "5.1", "5.2" , "5.3",
                 "6" , "6.1" , "6.2" , "6.3",
@@ -417,6 +440,9 @@ public class Main {
                 int bolunecekSayi;
                 int bölünecekSayı2 = 1;
                 switch (selectedTier) {
+                    case "1":
+                        bolunecekSayi = 1;
+                        break;
                     case "4.1":
                         bolunecekSayi = 2;
                         bölünecekSayı2 = 2;
@@ -490,12 +516,25 @@ public class Main {
                 int sonuc = 0;
 
                 for (int i = elimizdekiRaw; i >= bolunecekSayi; i--) {
-                    if (deneme(i, returnRate, bolunecekSayi) == istenilenDeger) {
-                        sonuc = i;
-                        break;
+                    int testValue = deneme(i, returnRate, bolunecekSayi);
+                    if(selectedTier.equals("1")){
+                        if(testValue < istenilenDeger){
+                            sonuc = i+1;
+                            break;
+                        }
+                    }else {
+                        if (testValue == istenilenDeger) {
+                            sonuc = i;
+                            break;
+                        }
                     }
                 }
-                String sonucLabel = "Raw";
+                String sonucLabel;
+                if(selectedTier.equals("1")){
+                    sonucLabel = "Alt Tier";
+                }else{
+                    sonucLabel = "Raw";
+                }
                 resultLabel.setText("Result: Needed " + sonucLabel + " = " + sonuc/bölünecekSayı2);
 
             } catch (NumberFormatException ex) {
