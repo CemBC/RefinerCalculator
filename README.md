@@ -9,5 +9,5 @@ Also you can select both "%10 activity" and "%20 activity" in the same time but 
 
 1. To use application:
    - Please download java sdk from https://www.oracle.com/java/technologies/downloads/
-   - You can download jar file from [**projeAdi.jar**'ı indir](https://github.com/CemBC/RefinerCalculatorTemplate/blob/main/RefinedCalculator.jar)
+   - You can download jar file from [**RefinedCalculator**'ı indir](https://github.com/CemBC/RefinerCalculatorTemplate/raw/main/RefinedCalculator.jar)
    - Double click to jar file
